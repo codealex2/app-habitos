@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#007aff" />
+  <title>Contador de Agua</title>
+  <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f4f8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      font-size: 2rem;
+      color: #007aff;
+    }
+    .counter {
+      font-size: 5rem;
+      margin: 20px 0;
+    }
+    button {
+      font-size: 1.2rem;
+      padding: 15px 25px;
+      margin: 10px;
+      border: none;
+      border-radius: 12px;
+      color: white;
+      background-color: #007aff;
+      cursor: pointer;
+    }
+    button.reset {
+      background-color: #ff3b30;
+    }
+  </style>
+</head>
+<body>
+  <h1>💧 Vasos de agua</h1>
+  <div class="counter" id="counter">0</div>
+  <div>
+    <button onclick="addGlass()">+1 vaso</button>
+    <button class="reset" onclick="resetCounter()">Reiniciar</button>
+  </div>
+
+  <script>
+    const counterEl = document.getElementById("counter");
+
+    function loadCounter() {
+      const saved = localStorage.getItem("waterCount") || "0";
+      counterEl.textContent = saved;
+    }
+
+    function addGlass() {
+      let count = parseInt(localStorage.getItem("waterCount") || "0", 10);
+      count++;
+      localStorage.setItem("waterCount", count);
+      counterEl.textContent = count;
+    }
+
+    function resetCounter() {
+      localStorage.setItem("waterCount", "0");
+      counterEl.textContent = "0";
+    }
+
+    loadCounter();
+  </script>
+</body>
+</html>
